@@ -1,11 +1,17 @@
 #include<iostream>
 #include<iomanip> //For using setw(), setprecision(), ...
+#include<cmath>
 using namespace std;
 
-int main(){	
+int main(){
+	double RPY,PPY,NB,T;
+	int i=1;
 	cout << "Enter initial loan: ";
+	cin>>NB;
 	cout << "Enter interest rate per year (%): ";
+	cin>>RPY;
 	cout << "Enter amount you can pay per year: ";
+	cin>>PPY;
 
 	//use 'setw' to set width of table and 'left' to set left-alignment
 	//you can change input argument of 'setw()' to see the effect
@@ -20,14 +26,23 @@ int main(){
 	
 	//use 'fixed' and 'setprecision' to fix the number of decimal digits for displaying
 	//you can change input argument of 'setprecision()' to see the effect
-	cout << fixed << setprecision(2); 
-	cout << setw(13) << left << 1; 
-	cout << setw(13) << left << 1000.0;
-	cout << setw(13) << left << 50.0;
-	cout << setw(13) << left << 1050.0;
-	cout << setw(13) << left << 100.0;
-	cout << setw(13) << left << 950.0;
-	cout << "\n";	
 	
-	return 0;
+do {
+	cout << fixed << setprecision(2); 
+	cout << setw(13) << left << i++; 
+	cout << setw(13) << left << NB;
+	cout << setw(13) << left << (NB*RPY)/100;
+	cout << setw(13) << left << NB+(NB*RPY)/100;
+	T=NB+(NB*RPY)/100;
+	if(PPY>T){
+		PPY=T;
+	}
+	cout << setw(13) << left << PPY;
+	NB=(NB+(NB*RPY)/100)-PPY;
+	if(T-PPY<0){
+		PPY=T;
+	}
+	cout << setw(13) << left << NB;
+	cout << "\n";
+	}while(NB>0);
 }
